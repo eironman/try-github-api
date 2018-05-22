@@ -4,7 +4,6 @@ from github.api_client import GithubApiClient
 
 def organization_repos(request):
     """Shows the repositories of a organization"""
-    organization = None
     if 'organization' in request.POST:
         organization = request.POST['organization']
         api_client = GithubApiClient()
