@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="es">
+    <head>
+        <title>Github API {%block pagetitle %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'github/css/materialize.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'github/css/style.css' %}" />
+        <script type='text/javascript' src="{% static 'github/js/jquery-1.12.3.min.js' %}"></script>
+        <script type='text/javascript' src="{% static 'github/js/materialize.min.js' %}"></script>
+        <script type='text/javascript' src="{% static 'github/js/scripts.js' %}"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="row container">
+                    <div class="col-8">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Inicio</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="separator-a mb30"></div>
+            {% block primary %}
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card blue darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Find organization repositories</span>
+                                <form class="form" action="{% url 'repos:organization' %}" method="post">
+                                    {% csrf_token %}
+                                    <select name="organization">
+                                        <option value="" disabled selected>Choose organization</option>
+                                        <option value="microsoft">Microsoft</option>
+                                        <option value="airbnb">Airbnb</option>
+                                        <option value="twitter">Twitter</option>
+                                    </select>
+                                    <input class="btn" type="submit" value="FIND"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="card green darken-3">
+                            <div class="card-content white-text">
+                                <span class="card-title">Repositories with more stars</span>
+                                <form class="form" action="{% url 'repos:stars' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="number_of_repos" placeholder="Number or repositories" />
+                                    <input class="btn" type="submit" value="FIND"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </body>
+</html>

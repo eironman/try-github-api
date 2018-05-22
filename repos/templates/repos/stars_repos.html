@@ -1,0 +1,11 @@
+{% extends 'github/base_template.html' %}
+{%block pagetitle %}- Stars{% endblock %}
+{% block primary %}
+    <h1>{{number_of_repos}} repos with more stars</h1>
+    <h4>Total: {{repositories.total_count}}</h4>
+    <div class="mb50 collection">
+        {% for repo in repositories.items %}
+            <a class="collection-item" href="{{repo.html_url}}">{{repo.full_name}} ({{repo.stargazers_count}} stars)</a>
+        {% endfor %}
+    </div>
+{% endblock %}
