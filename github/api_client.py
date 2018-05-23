@@ -1,4 +1,5 @@
 import requests
+from github.helpers.dictionaries import merge_two_dicts
 
 
 class GithubApiClient():
@@ -12,7 +13,7 @@ class GithubApiClient():
             'page': self.PAGE_NUM,
             'per_page': self.RESULTS_PER_PAGE
         }
-        params = {**request_params, **default_params}
+        params = merge_two_dicts(request_params, default_params)
         response_object = requests.get(self.BASE_URL + path, params=params)
         response = response_object.json()
         return response
